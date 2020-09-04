@@ -1,0 +1,35 @@
+Taught by Laurence Moroney from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: Sequences and Prediction
+  - Machine learning applies to time series
+  - Common patterns in time series
+  - Metrics for evaluating performance
+  - Moving average and differencing
+  - Trailing vs centered windows
+  - Forecasting
+  - Exercise: Create and predict synthetic data
+
+Module 2: Deep Neural Networks for Time Series
+  - Preparing features and labels
+  - Sequence bias
+  - Feeding windowed dataset into neural network
+  - Single layer neural network
+  - Machine learning on time windows
+  - Prediction
+  - More on single layer neural network
+  - Deep neural network training, tuning and prediction
+  - Exercise: Predict with a DNN 
+
+Module 3: RNN for Time Series
+  - Shape of the inputs to the RNN
+  - Outputting a sequence
+  - Lambda layers
+  - Adjusting the learning rate dynamically
+  - RNN, LSTM
+  - Exercise: Mean absolute error
+
+Module 4: Real world Time Series Data
+  - CNN, Bidirectional LSTM
+  - Batch size
+  - Exercise: Sunspots

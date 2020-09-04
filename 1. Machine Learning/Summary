@@ -1,0 +1,18 @@
+Taught by Andrew Ng from Stanford University (Offered through Coursera)
+Programming software: Matlab
+Completed on 20 June 20
+
+Module 1
+    Supervised Learning
+    - Linear regression, logistic regression, neural networks, SVMs
+Module 2
+    Unsupervised learning
+    - K-means, PCA, Anomaly detection
+Module 3
+    Special applications/ topics
+    - Recommender systems, large scale machine learning
+Module 4
+    Advice on building a machine learning system
+    - Bias/variance, regularization; evaluation of learning algorithms, learning curves, error analysis, ceiling analysis
+
+* Source code for the graded exercises are not shared here due to Code Sharing Policy from Coursera’s Honor Code. 

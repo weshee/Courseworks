@@ -1,0 +1,25 @@
+Taught by Laurence Moroney from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: Sentiment in Text
+  - Word based encodings
+  - Using API
+  - Text to sequence
+  - Tokenizer
+  - Padding
+  - Exercise: Explore the BBC news archive
+
+Module 2: Word Embeddings
+  - TensorFlow datasets
+  - Exercise: BBC news archive
+
+Module 3: Sequence Models
+  - Implementing LSTM
+  - Accuracy and loss
+  - Using a convolutional network
+  - Exercise: Exploring overfitting in NLP
+
+Module 4: Sequence models and literature
+  - Sequence models and literature
+  - Generate poetry
+  - Exercise: Using LSTMS to write Shakespeares

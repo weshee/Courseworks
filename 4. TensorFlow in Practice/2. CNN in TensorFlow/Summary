@@ -1,0 +1,21 @@
+Taught by Laurence Moroney from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: Exploring a Larger Dataset
+  - Visualization the effect of the convolutions
+  - Accuracy and loss
+  - Programming assignment: Attempt the cats vs dogs Kaggle challenge
+
+Module 2: Augmentation: A technique to avoid overfitting
+  - ImageDataGenerator
+  - Programming assignment: Fill cats vs dogs using augmentation
+
+Module 3: Transfer Learning
+  - Exploring transfer learning with inception
+  - Transferred features
+  - Dropouts
+  - Programming assignment: Horses vs humans using transfer learning
+  
+Module 4: Multiclass Classification
+  - Moving from binary to multiclass classification
+  - Programming assignment: Multiclass classifier

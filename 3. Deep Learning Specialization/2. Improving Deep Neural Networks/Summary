@@ -1,0 +1,71 @@
+Course: Improving deep neural networks: Hyperparameters tuning, regularisation and optimization
+Taught by Andrew Ng from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: Practical aspects of deep learning
+  - Regularization
+    1. L2
+    2. Drop out	
+    3. Data augmentation
+    4. Early stopping
+  - Setting up optimisation problem
+    1. Normalizing inputs
+    2. Vanishing/ exploding gradients
+    3. Weight initialisation
+    4. Gradient checking
+  - Programming assignment learning outcome:
+    1. Initialization
+       * Understand that different initialization methods and their impact on the model performance
+       * Implement zero initialization and and see it fails to "break symmetry",
+       * Recognize that random initialization "breaks symmetry" and yields more efficient models
+       * Understand that both random initialization and scaling can be used to get even better training performance on the model.
+       * Random initialization is used to break symmetry and make sure different hidden units can learn different things
+       * Don't intialize to values that are too large
+       * He initialization works well for networks with ReLU activations.
+    2. Regularisation
+       * Understand that different regularization methods that could help your model.
+       * Implement dropout and see it work on data.
+       * Recognize that a model without regularization gives you a better accuracy on the training set but nor necessarily on the test set.
+       * Understand that you could use both dropout and regularization on your model
+    3. Gradient Checking
+       * Implement gradient checking from scratch.
+       * Understand how to use the difference formula to check the backpropagation implementation.
+       * Recognize that backpropagation algorithm should give similar results as the ones by computing the difference formula.
+       * Learn how to identify which parameter's gradient was computed incorrectly.
+ 
+Module 2: Optimization algorithms
+  - Mini-batch gradient descent
+  - Adam optimization (Momentum and RMSprop)
+  - Learning rate decay
+  - Programming assignment learning outcome:
+    1. Gradient descent
+       * The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples we use to perform one update step.
+       * Learning rate hyperparameter α has to be tuned
+       * With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large).
+    2. Mini-batch gradient descent
+       * Shuffling and Partitioning are the two steps required to build mini-batches
+       * Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.
+    3. Momentum
+       * Momentum takes past gradients into account to smooth out the steps of gradient descent. It can be applied with batch gradient descent, mini-batch gradient descent or stochastic gradient descent.
+       * You have to tune a momentum hyperparameter β and a learning rate α.
+    4. Adam
+       * Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum)
+       * Usually works well even with little tuning of hyperparameters (except α)
+    5. Rule of thumb (By tuning priority)
+       * α
+       * β, hidden units, mini-batch size
+       * No. Of layers, learning rate decay
+
+Module 3: Hyperparameter tuning, batch normalisation and programming framework
+  - Using an appropriate scale to pick hyperparameters
+  - Fitting batch norm into a neural network
+  - Multiclass classification
+  - Introduction to Deep learning framework: TensorFlow
+  - Assignment learning outcome:
+    1. Take the following steps when coding in TensorFlow
+       * Create a graph containing Tensors (Variables, Placeholders ...) and Operations (tf.matmul, tf.add, ...)
+       * Create a session
+       * Initialize the session
+       * Run the session to execute the graph
+    2. Execute the graph multiple times as seen in model()
+    3. Understand that the backpropagation and optimization is automatically done when running the session on the "optimizer" object.

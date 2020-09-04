@@ -1,0 +1,57 @@
+Taught by Andrew Ng from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: ML strategy (1)
+  - Orthogonalization - What to tune to achieve the target
+    1. Chain of assumptions
+       * Fit training set well on cost function (Bigger network, Adam)
+       * Fit dev set well on cost function (Regularisation, bigger training set)
+       * Fit test set well on cost function (Bigger dev set)
+       * Perform well in real world (Change dev set or cost function)
+  - Setting up goal
+    1. Train, dev & test sets
+    2. Define evaluation metric
+       * Single number evaluation metric
+       * Optimizing and satisfying metric (e.g. accuracy and runtime)
+    3. Worry separately about how to do well on the metric
+  - Comparing to human-level performance
+    1. Bayes error
+    2. Avoidable bias
+       - Train bigger model
+       - Train longer/ better optimization algorithms
+       * NN architecture/ hyperparameters search (RNN/ CNN) 
+    3. Variance
+       * More data
+       * Regularization
+       * NN architecture/ hyperparameters search
+
+Module 2: ML strategy (2)
+  - Error analysis
+    1. Get ~100 mislabeled dev set examples
+    2. Evaluate multiple ideas in parallel by using spreadsheet
+    3. Cleaning up incorrectly labelled data (Systematic & random errors)
+  - Mismatched training and dev/test set
+    1. Human level, train, train-dev, dev, test set
+    2. Data mismatch between train and dev/test set
+  - Addressing data mismatch
+    1. Carry out manual error analysis to try to understand difference between training and dev/test sets
+    2. Make training data more similar; or collect more data similar to dev/test sets
+    3. Artificial data synthesis
+  - Learning from multiple tasks
+    1. Pre-training, fine-tuning 
+       * Same input X
+       * Lot more data for Task A than B
+       * Low level features from A could be helpful for learning B
+    2. Multitask learning
+       * Not softmax as there are multiple true values in Y
+  - End to end learning
+    1. Pros
+       * Let the data speak
+       * Less hand-designing of components needed
+    2. Cons
+       * May need large amount of data
+       * Excludes potentially useful hand-designed components
+
+Additions:
+  - Plot graphs
+    1. Iterations vs cost (learning rate = xx)

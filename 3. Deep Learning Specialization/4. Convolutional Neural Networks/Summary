@@ -1,0 +1,45 @@
+Taught by Andrew Ng from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: Foundations of convolutional neural networks
+  - Edge detection
+  - Padding, strided, filter
+  - Pooling layers
+
+Module 2: Deep convolutional models: case studies
+  - LeNet-5, AlexNet, VGG-16
+  - ResNets
+  - 1x1 convolutions
+  - Assignment: ResNets
+    * Very deep "plain" networks don't work in practice because they are hard to train due to vanishing gradients.
+    * The skip-connections help to address the Vanishing Gradient problem. They also make it easy for a ResNet block to learn an identity function.
+    * There are two main types of blocks: The identity block and the convolutional block.
+    * Very deep Residual Networks are built by stacking these blocks together.
+
+Module 3: Object detection
+  - Detection algorithm
+    * Object localisation
+    * Landmark detection
+    * Object detection
+    * Convolutional implementation of sliding windows
+    * Bounding box predictions
+    * Intersection over union
+    * Nonmax suppression
+    * Anchor boxes
+    * YOLO algorithm
+  - Assignment: Autonomous driving application car detection
+
+Module 4: Special applications: Face recognition & Neural style transfer
+  - Face recognition
+    * One shot learning
+    * Siamese network
+    * Triplet loss
+    * Face verification and binary classification
+  - Neural style transfer
+    * Cost Function
+      1. Content cost function
+      2. Style cost function
+    * 1D and 3D generalisation 
+  - Assignment: 
+    1. Art generation with neural style transfer
+    2. Face recognition

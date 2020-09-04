@@ -1,0 +1,39 @@
+Taught by Andrew Ng from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: Introduction to deep learning
+  - Review on supervised learning with neural networks
+ 
+Module 2: Neural networks basics
+  - Logistic regression as a neural network
+  - Python and vectorization (with numpy)
+  - Preprocessing a new dataset
+    * Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, ...)
+    * Reshape the datasets such that each example is now a vector of size (num_px * num_px * 3, 1)
+    * "Standardize" the data
+  - Programming assignment: Logistic regression with a neural network mindset (image recognition algorithm)
+
+Module 3: Shallow neural networks
+  - Nonlinear activation functions
+  - Gradient descent for neural networks
+  - Programming assignment: Planar data classification with a hidden layer
+  
+Module 4: Deep neural networks
+  - Forward and back propagation in a deep network
+  - Building blocks of deep neural networks
+  - Parameters vs hyperparameters
+  - The general methodology to build a NN is to:
+    1. Define the model structure (n_x, n_h, n_y, etc)
+    2. Initialize the model's parameters for an L-layer neural network
+    3. Implement the forward propagation module
+       * Complete the LINEAR part of a layer's forward propagation step
+       * Compute [LINEAR -> ACTIVATION] forward function
+       * Compute L_model_forward function
+    4. Compute the loss
+    5. Implement the backward propagation module
+       * Complete the LINEAR part of a layer's backward propagation step
+       * Compute [LINEAR -> ACTIVATION] backward function
+       * Compute L_model_backward function
+    6. Update the parameters
+    7. Repeat steps 1-5
+  - Programming assignment: Deep neural network application with L-layer neural network.

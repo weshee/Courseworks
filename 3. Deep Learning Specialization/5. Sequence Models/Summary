@@ -1,0 +1,38 @@
+Taught by Andrew Ng from deeplearning.ai (Offered through Coursera)
+Programming software: Python
+
+Module 1: Recurrent Neural Networks
+  - RNN model
+  - Backpropagation through time
+  - Different types of RNNS
+  - Language model and sequence generation
+  - Sampling novel sequences
+  - Vanishing gradients
+  - GRU, LSTM, Bidirectional RNN, Deep RNN
+  - Programming assignments:
+    1. Building a RNN step by step
+    2. Dinosaur island - character level language modelling
+    3. Jazz improvisation with LSTM
+
+Module 2: NLP & Word Embedding
+  - Introduction to word embeddings
+    * Word representation
+    * Embedding matrix
+  - Learning word embeddings
+    * Word2Vec
+    * Negative sampling
+    * GloVe word vectors
+  - Applications using word embedding
+    * Sentiment classification
+    * Debiasing word embedding
+  - Programming assignments:
+    1. Operations on word vectors - debasing
+    2. Emojify
+
+Module 3: Sequence Models & Attention Mechanism
+  - Various sequence to sequence architectures
+  - Speech recognition - audio data
+    * Trigger word detection
+  - Programming assignments:
+    1. Neural machine translation with attention
+    2. Trigger word detection

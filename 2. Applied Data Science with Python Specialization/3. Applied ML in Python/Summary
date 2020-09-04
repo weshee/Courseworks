@@ -1,0 +1,78 @@
+Taught by Kevyn Collins-Thompson from University of Michigan (Offered through Coursera)
+Programming software: Python
+Completed on 30 Jun 20
+
+Module 1: A simple classification task
+  from sklearn.neighbors import KNeighborsClassifier
+    - Create classifier object
+      A nearest neighbor alogrithm needs four things specified
+        1. A distance metric
+            Typically Euclidean (Minkowski with p = 2)
+        2. How many 'nearest' neighbors to look at?
+            e.g. five
+        3. Optional weighting function on the neighbor points
+            Ignored
+        4. Method for aggregating the classes of neighbor points
+            Simple majority vote
+            (Class with the most representatives among nearest neighbors)
+    - Source code
+      X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 1-s)
+      knn.fit(X_train, y_train)
+      knn.score(X_test, y_test)
+      .predict(X_test)
+    - Check coursework for the following information
+      - How sensitive is k-NN classification accuracy to the choice of the 'k' parameter?
+      - How sensitive is k-NN classification accuracy to the train/test split proportion?
+      
+Module 2: Supervised learning part 1
+  1 K-Nearest Neighbors
+    - Classification
+    - Regression
+    - Regression model complexity as a function of K
+  2 Linear models for regression
+    - Linear regression
+    - Ridge regression
+    - Feature normalization
+    - Regularization parameter: alpha
+  3 Lasso regression
+    - Regularization parameter: alpha
+  4 Polynomial regression
+  5 Linear models for classification
+    - Logistic regression
+    - Regularization parameter: C
+  6 Support Vector Machines
+    - Linear SVM 
+    - Regularization parameter: C
+  7 Multi-class classification with linear models
+    - LinearSVC with M classes generates M one vs rest classifiers
+  8 Kernelized Support Vector Machines
+    - RBF kernel: C and gamma parameter
+  9 Cross-validation
+  10 Decision Trees
+    - Feature importance
+  11 pd.get_dummies (convert categorical variable into dummy/indicator variables)
+
+Module 3: Evaluation
+  1 Confusion matrices
+  2 Decision functions
+  3 Precision-recall curves
+  4 ROC curves, AUC
+  5 Evaluation measures for multi-class classification
+    - Multi-class confusion matrix and classification reprot
+    - Micro vs macro-averaged metrics
+  6 Regression evaluation metrics
+  7 Model selection using evaluation metrics
+    - Cross validation
+    - Grid search
+  
+Module 4: Supervised learning part 
+  1 Naive Bayes classifiers (assume that features are conditionally independent)
+  2 Ensembles of Decision Trees
+    - Random forests
+    - Gradient-boosted decision trees
+  3 Neural networks
+    - Classification
+    - Activation function
+    - Hidden layers
+    - Regularization parameter: alpha
+    - Regression

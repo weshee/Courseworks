@@ -1,0 +1,404 @@
+# Module 1
+# plotting a scatter matrix
+def scatter_matrix(): 
+    from matplotlib import cm
+
+    X = fruits[['height', 'width', 'mass', 'color_score']]
+    y = fruits['fruit_label']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+    cmap = cm.get_cmap('gnuplot')
+    scatter = pd.scatter_matrix(X_train, c= y_train, marker = 'o', s=40, hist_kwds={'bins':15}, figsize=(9,9), cmap=cmap)
+
+# plotting a 3D scatter plot
+def scatter_3D(): 
+    from mpl_toolkits.mplot3d import Axes3D
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection = '3d')
+    ax.scatter(X_train['width'], X_train['height'], X_train['color_score'], c = y_train, marker = 'o', s=100)
+    ax.set_xlabel('width')
+    ax.set_ylabel('height')
+    ax.set_zlabel('color_score')
+    plt.show()
+
+def plot_fruit_knn(X, y, n_neighbors, weights):
+    X_mat = X[['height', 'width']].as_matrix()
+    y_mat = y.as_matrix()
+
+    # Create color maps
+    cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF','#AFAFAF'])
+    cmap_bold  = ListedColormap(['#FF0000', '#00FF00', '#0000FF','#AFAFAF'])
+
+    clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
+    clf.fit(X_mat, y_mat)
+
+    # Plot the decision boundary by assigning a color in the color map
+    # to each mesh point.
+    
+    mesh_step_size = .01  # step size in the mesh
+    plot_symbol_size = 50
+    
+    x_min, x_max = X_mat[:, 0].min() - 1, X_mat[:, 0].max() + 1
+    y_min, y_max = X_mat[:, 1].min() - 1, X_mat[:, 1].max() + 1
+    xx, yy = numpy.meshgrid(numpy.arange(x_min, x_max, mesh_step_size),
+                         numpy.arange(y_min, y_max, mesh_step_size))
+    Z = clf.predict(numpy.c_[xx.ravel(), yy.ravel()])
+
+    # Put the result into a color plot
+    Z = Z.reshape(xx.shape)
+    plt.figure()
+    plt.pcolormesh(xx, yy, Z, cmap=cmap_light)
+
+    # Plot training points
+    plt.scatter(X_mat[:, 0], X_mat[:, 1], s=plot_symbol_size, c=y, cmap=cmap_bold, edgecolor = 'black')
+    plt.xlim(xx.min(), xx.max())
+    plt.ylim(yy.min(), yy.max())
+
+    patch0 = mpatches.Patch(color='#FF0000', label='apple')
+    patch1 = mpatches.Patch(color='#00FF00', label='mandarin')
+    patch2 = mpatches.Patch(color='#0000FF', label='orange')
+    patch3 = mpatches.Patch(color='#AFAFAF', label='lemon')
+    plt.legend(handles=[patch0, patch1, patch2, patch3])
+
+        
+    plt.xlabel('height (cm)')
+    plt.ylabel('width (cm)')
+    
+    plt.show()
+
+# Assignment 1
+# Dataset
+from sklearn.datasets import load_breast_cancer
+
+# KNeighborsClassifier
+def KNeighborsClassifier():
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)  # X_train:(m,n_x), y_train:(m,)
+    knn = KNeighborsClassifier(n_neighbors = 1)
+    knn.fit(X_train, y_train)
+    knn.predict(sample)  # sample:(1,n_x)
+    knn.score(X_test, y_test)
+
+# Module 2
+# Communities and Crime dataset
+(X_crime, y_crime) = load_crime_dataset()
+def lr():
+    X_train, X_test, y_train, y_test = train_test_split(X_crime, y_crime,
+                                                   random_state = 0)
+    linreg = LinearRegression().fit(X_train, y_train)
+
+    print('linear model intercept: {}'.format(linreg.intercept_))
+    print('linear model coeff:\n{}'.format(linreg.coef_))
+    print('R-squared score (training): {:.3f}'.format(linreg.score(X_train, y_train)))
+    print('R-squared score (test): {:.3f}'.format(linreg.score(X_test, y_test)))
+
+def ridge_lr():
+    from sklearn.linear_model import Ridge
+    from sklearn.preprocessing import MinMaxScaler
+    scaler = MinMaxScaler()
+    X_train, X_test, y_train, y_test = train_test_split(X_crime, y_crime,random_state = 0)
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)    
+    linridge = Ridge(alpha=20.0).fit(X_train_scaled, y_train) 
+
+# When to use ridge vs lasso regression
+# - Many small/ medium sized effects: use ridge
+# - Only a few variables with medium/ large effect: use lasso
+
+def linlasso():
+    linlasso = Lasso(alpha=2.0, max_iter = 10000).fit(X_train_scaled, y_train)
+
+def logistic_regression():
+    clf = LogisticRegression(C=100).fit(X_train, y_train)
+
+def SVC():
+    clf = SVC(kernel = 'linear', C=1.0).fit(X_train, y_train) 
+
+# LinearSVC with M classes generates M one vs rest classifiers.
+def linearSVC():
+    clf = LinearSVC(C=5, random_state = 67).fit(X_train, y_train)
+
+def kernelized_SVC():
+    clf = SVC(kernel = 'poly', degree = 3).fit(X_train, y_train  
+
+def rbf_SVF():
+    clf = SVC(kernel = 'rbf', gamma=1.0, C = 15).fit(X_train, y_train)
+
+def cross_validation():
+    from sklearn.model_selection import cross_val_score
+
+    clf = KNeighborsClassifier(n_neighbors = 5)
+    cv_scores = cross_val_score(clf, X, y)
+    print('Cross-validation scores (3-fold):', cv_scores)
+    print('Mean cross-validation score (3-fold): {:.3f}'.format(np.mean(cv_scores)))
+
+def decision_tress():
+    from sklearn.datasets import load_iris
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.model_selection import train_test_split
+
+    iris = load_iris()
+    X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state = 3)
+    clf = DecisionTreeClassifier(max_depth = 3, min_samples_leaf = 8, random_state = 0).fit(X_train, y_train)
+
+    print('Accuracy of Decision Tree classifier on training set: {:.2f}'.format(clf.score(X_train, y_train)))
+    print('Accuracy of Decision Tree classifier on test set: {:.2f}'.format(clf.score(X_test, y_test)))
+
+# Assignment 2
+# Dataset
+np.random.seed(0)
+n = 15
+x = np.linspace(0,10,n) + np.random.randn(n)/5
+y = np.sin(x)+x/6 + np.random.randn(n)/10
+X_train, X_test, y_train, y_test = train_test_split(x, y, random_state=0)
+
+# Regression
+def polynomial_lr():
+    from sklearn.linear_model import LinearRegression
+    from sklearn.preprocessing import PolynomialFeatures
+    from sklearn.metrics.regression import r2_score
+
+    train_score = np.zeros((10,))
+    test_score = np.zeros((10,))
+
+    for i in range(10):
+        poly = PolynomialFeatures(degree=i)
+        X_train_poly = poly.fit_transform(X_train.reshape(-1,1))
+        X_test_poly = poly.transform(X_test.reshape(-1,1))
+        lr = LinearRegression().fit(X_train_poly, y_train)
+        # long way to get regressiong score
+        y_train_predict = np.dot(X_train_poly, lr.coef_) + lr.intercept_
+        y_test_predict = np.dot(X_test_poly, lr.coef_) + lr.intercept_
+        r2_train = r2_score(y_train, y_train_predict)
+        r2_test = r2_score(y_test, y_test_predict)
+        # short way to get 
+        # r2_train2 = lr.score(X_train_poly, y_train)
+        # r2_test2 = lr.score(X_test_poly, y_test)
+        train_score[i] = r2_train
+        test_score[i] = r2_test
+
+    def poly_plot():
+        import matplotlib.pyplot as plt
+        %matplotlib notebook
+        plt.figure()
+        plt.plot(np.linspace(1,10,10), train_score[0], label='training data')
+        plt.plot(np.linspace(1,10,10), test_score[1], label='test data')
+        plt.legend(loc=4);
+    
+    poly_plot()
+    return (train_score, test_score)
+
+# Classification
+def decision_tree_classifier():
+    import pandas as pd
+    import numpy as np
+    from sklearn.model_selection import train_test_split
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.svm import SVC
+    from sklearn.model_selection import validation_curve
+
+    mush_df = pd.read_csv('mushrooms.csv')
+    mush_df2 = pd.get_dummies(mush_df)
+
+    X_mush = mush_df2.iloc[:,2:]
+    y_mush = mush_df2.iloc[:,1]
+
+    X_train2, X_test2, y_train2, y_test2 = train_test_split(X_mush, y_mush, random_state=0)
+    X_subset = X_test2
+    y_subset = y_test2
+    clf = DecisionTreeClassifier(random_state=0).fit(X_train2, y_train2)
+    df = pd.DataFrame(data=clf.feature_importances_, index=X_train2.columns).sort_values(0, ascending=False)
+    param_range = np.logspace(-4, 1, 6)
+    train_scores, test_scores = validation_curve(SVC(kernel='rbf', C=1, random_state = 0), X_subset, y_subset, scoring='accuracy', param_name='gamma', param_range=param_range, cv=3)
+    train_scores_mean = train_scores.mean(axis=1)
+    test_scores_mean = test_scores.mean(axis=1)
+    def decision_tree_classifier_plot():
+        import matplotlib.pyplot as plt
+        %matplotlib notebook
+        plt.figure()
+        plt.xscale('log')
+        plt.plot(np.logspace(-4, 1, 6), train_scores_mean[0], label='training data')
+        plt.plot(np.logspace(-4, 1, 6), test_scores_mean[1], label='test data')
+        plt.legend(loc=4);
+    decision_tree_classifier_plot()
+
+Module 3
+
+# Confusion matrix
+def confusion_mat():
+    ffrom sklearn.metrics import confusion_matrix
+    lr = LogisticRegression().fit(X_train, y_train)
+    lr_predicted = lr.predict(X_test)
+    confusion = confusion_matrix(y_test, lr_predicted) 
+
+# Evaluation metrics for binary classification
+def eval_metrics():
+    from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+    from sklearn.metrics import classification_report
+    # Accuracy = TP + TN / (TP + TN + FP + FN)
+    # Precision = TP / (TP + FP)
+    # Recall = TP / (TP + FN)  Also known as sensitivity, or True Positive Rate
+    # F1 = 2 * Precision * Recall / (Precision + Recall) 
+    print('Accuracy: {:.2f}'.format(accuracy_score(y_test, tree_predicted)))
+    print('Precision: {:.2f}'.format(precision_score(y_test, tree_predicted)))
+    print('Recall: {:.2f}'.format(recall_score(y_test, tree_predicted)))
+    print('F1: {:.2f}'.format(f1_score(y_test, tree_predicted))) 
+    # Combined report with all above metrics
+    print(classification_report(y_test, tree_predicted, target_names=['not 1', '1']))
+
+# Decision functions
+def dec_func():
+    X_train, X_test, y_train, y_test = train_test_split(X, y_binary_imbalanced, random_state=0)
+    y_scores_lr = lr.fit(X_train, y_train).decision_function(X_test)
+    y_score_list = list(zip(y_test[0:20], y_scores_lr[0:20]))
+    # show the decision_function scores for first 20 instances
+
+def prob_pos_class():
+    X_train, X_test, y_train, y_test = train_test_split(X, y_binary_imbalanced, random_state=0)
+    y_proba_lr = lr.fit(X_train, y_train).predict_proba(X_test)
+    y_proba_list = list(zip(y_test[0:20], y_proba_lr[0:20,1]))
+    # show the probability of positive class for first 20 instances
+
+# Precision-recall curves
+def precision_recall():
+    from sklearn.metrics import precision_recall_curve
+
+    precision, recall, thresholds = precision_recall_curve(y_test, y_scores_lr)
+    closest_zero = np.argmin(np.abs(thresholds))
+    closest_zero_p = precision[closest_zero]
+    closest_zero_r = recall[closest_zero]
+
+    plt.figure()
+    plt.xlim([0.0, 1.01])
+    plt.ylim([0.0, 1.01])
+    plt.plot(precision, recall, label='Precision-Recall Curve')
+    plt.plot(closest_zero_p, closest_zero_r, 'o', markersize = 12, fillstyle = 'none', c='r', mew=3)
+    plt.xlabel('Precision', fontsize=16)
+    plt.ylabel('Recall', fontsize=16)
+    plt.axes().set_aspect('equal')
+    plt.show()
+
+# ROC curves, AUC
+def roc_curves():
+    from sklearn.metrics import roc_curve, auc
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y_binary_imbalanced, random_state=0)
+
+    y_score_lr = lr.fit(X_train, y_train).decision_function(X_test)
+    fpr_lr, tpr_lr, _ = roc_curve(y_test, y_score_lr)
+    roc_auc_lr = auc(fpr_lr, tpr_lr)
+
+    plt.figure()
+    plt.xlim([-0.01, 1.00])
+    plt.ylim([-0.01, 1.01])
+    plt.plot(fpr_lr, tpr_lr, lw=3, label='LogRegr ROC curve (area = {:0.2f})'.format(roc_auc_lr))
+    plt.xlabel('False Positive Rate', fontsize=16)
+    plt.ylabel('True Positive Rate', fontsize=16)
+    plt.title('ROC curve (1-of-10 digits classifier)', fontsize=16)
+    plt.legend(loc='lower right', fontsize=13)
+    plt.plot([0, 1], [0, 1], color='navy', lw=3, linestyle='--')
+    plt.axes().set_aspect('equal')
+    plt.show()
+
+# Micro- vs macro-averaged metrics
+def micro_macro_metrics():
+    print('Micro-averaged precision = {:.2f} (treat instances equally)'
+      .format(precision_score(y_test_mc, svm_predicted_mc, average = 'micro')))
+    print('Macro-averaged precision = {:.2f} (treat classes equally)'
+      .format(precision_score(y_test_mc, svm_predicted_mc, average = 'macro')))
+    print('Micro-averaged f1 = {:.2f} (treat instances equally)'
+      .format(f1_score(y_test_mc, svm_predicted_mc, average = 'micro')))
+    print('Macro-averaged f1 = {:.2f} (treat classes equally)'
+      .format(f1_score(y_test_mc, svm_predicted_mc, average = 'macro')))
+
+# Cross validation example
+def cross_val():
+    from sklearn.model_selection import cross_val_score
+    from sklearn.svm import SVC
+
+    dataset = load_digits()
+    X, y = dataset.data, dataset.target == 1
+    clf = SVC(kernel='linear', C=1)
+
+    # accuracy is the default scoring metric
+    print('Cross-validation (accuracy)', cross_val_score(clf, X, y, cv=5))
+    # use AUC as scoring metric
+    print('Cross-validation (AUC)', cross_val_score(clf, X, y, cv=5, scoring = 'roc_auc'))
+    # use recall as scoring metric
+    print('Cross-validation (recall)', cross_val_score(clf, X, y, cv=5, scoring = 'recall'))
+
+# Grid search example
+def grid_search():
+    from sklearn.svm import SVC
+    from sklearn.model_selection import GridSearchCV
+    from sklearn.metrics import roc_auc_score
+
+    dataset = load_digits()
+    X, y = dataset.data, dataset.target == 1
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+    clf = SVC(kernel='rbf')
+    grid_values = {'gamma': [0.001, 0.01, 0.05, 0.1, 1, 10, 100]}
+
+    # default metric to optimize over grid parameters: accuracy
+    grid_clf_acc = GridSearchCV(clf, param_grid = grid_values)
+    grid_clf_acc.fit(X_train, y_train)
+    y_decision_fn_scores_acc = grid_clf_acc.decision_function(X_test) 
+
+    print('Grid best parameter (max. accuracy): ', grid_clf_acc.best_params_)
+    print('Grid best score (accuracy): ', grid_clf_acc.best_score_)
+
+    # alternative metric to optimize over grid parameters: AUC
+    grid_clf_auc = GridSearchCV(clf, param_grid = grid_values, scoring = 'roc_auc')
+    grid_clf_auc.fit(X_train, y_train)
+    y_decision_fn_scores_auc = grid_clf_auc.decision_function(X_test) 
+
+    print('Test set AUC: ', roc_auc_score(y_test, y_decision_fn_scores_auc))
+    print('Grid best parameter (max. AUC): ', grid_clf_auc.best_params_)
+    print('Grid best score (AUC): ', grid_clf_auc.best_score_)
+
+Module 4
+# Naive Bayes classifiers
+def naive_bayes():
+    nbclf = GaussianNB().fit(X_train, y_train)
+
+# Ensembles of decision trees
+def random_forests():
+    clf = RandomForestClassifier().fit(X_train, y_train)
+    # Random Forest Classifier, complex binary dataset, default settings
+
+# Gradient-boosted decision trees
+def grad_boosted_decision_trees():
+    clf = GradientBoostingClassifier().fit(X_train, y_train)
+    # GBDT, complex binary dataset, default settings
+
+# Neural networks: Classification
+def nnclf():
+    # Single hidden layer
+    nnclf = MLPClassifier(hidden_layer_sizes = [10], solver='lbfgs',
+                         random_state = 0).fit(X_train, y_train)
+    # Two hidden layer
+    nnclf = MLPClassifier(hidden_layer_sizes = [10, 10], solver='lbfgs',
+                     random_state = 0).fit(X_train, y_train)
+    # Regularisation
+    nnclf = MLPClassifier(solver='lbfgs', activation = 'tanh', alpha = this_alpha, hidden_layer_sizes = [100, 100], random_state = 0).fit(X_train, y_train)
+
+# Neural networks: Regression
+def nn_reg():
+    from sklearn.neural_network import MLPRegressor
+    
+    fig, subaxes = plt.subplots(2, 3, figsize=(11,8), dpi=70)
+    X_predict_input = np.linspace(-3, 3, 50).reshape(-1,1)
+    X_train, X_test, y_train, y_test = train_test_split(X_R1[0::5], y_R1[0::5], random_state = 0)
+
+    for thisaxisrow, thisactivation in zip(subaxes, ['tanh', 'relu']):
+        for thisalpha, thisaxis in zip([0.0001, 1.0, 100], thisaxisrow):
+            mlpreg = MLPRegressor(hidden_layer_sizes = [100,100], activation = thisactivation, alpha = thisalpha, solver = 'lbfgs').fit(X_train, y_train)
+            y_predict_output = mlpreg.predict(X_predict_input)
+            thisaxis.set_xlim([-2.5, 0.75])
+            thisaxis.plot(X_predict_input, y_predict_output, '^', markersize = 10)
+            thisaxis.plot(X_train, y_train, 'o')
+            thisaxis.set_xlabel('Input feature')
+            thisaxis.set_ylabel('Target value')
+            thisaxis.set_title('MLP regression\nalpha={}, activation={})'.format(thisalpha, thisactivation))
+            plt.tight_layout()
